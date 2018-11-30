@@ -1,0 +1,22 @@
+\documentclass{article}
+
+\usepackage{minted}
+
+\begin{document}
+
+\begin{minted}{python}
+def p_c12__n13(tf):
+    # c12 + p --> n13
+    rate = 0.0
+    
+    # ls09n
+    rate += np.exp(  17.1482 + -13.692*tf.T913i + -0.230881*tf.T913
+                  + 4.44362*tf.T9 + -3.15898*tf.T953 + -0.666667*tf.lnT9)
+    # ls09r
+    rate += np.exp(  17.5428 + -3.77849*tf.T9i + -5.10735*tf.T913i + -2.24111*tf.T913
+                  + 0.148883*tf.T9 + -1.5*tf.lnT9)
+    
+    return rate
+\end{minted}
+
+\end{document}

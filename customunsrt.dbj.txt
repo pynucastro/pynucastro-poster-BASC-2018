@@ -1,0 +1,18 @@
+\input docstrip
+
+\preamble
+\endpreamble
+
+\postamble
+\endpostamble
+
+\keepsilent
+\askforoverwritefalse
+\def\MBopts{\from{merlin.mbs}{%
+seq-no,% no sorting
+nmlm,% limit number of names in bibliography
+x5,% maximum number of names to appear
+m5,% minimum number of names before et al. is written
+}}
+\generate{\file{customunsrt.bst}{\MBopts}}
+\endbatchfile
