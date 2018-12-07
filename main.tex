@@ -95,12 +95,12 @@
 
 \begin{alertblock}{Abstract}
 
-  pynucastro is developed to meet both pedagogical and research needs
+  \textbf{pynucastro} is developed to meet both pedagogical and research needs
   in the field of nuclear astrophysics by providing a Python interface
   to nuclear reaction rate databases (including the JINA Reaclib
-  nuclear reaction rate database). It is meant for both interactive
-  exploration of reaction rates (through Jupyter notebooks) and for
-  creating reaction networks for use in simulation codes.
+  nuclear reaction rate database). It is meant for both 
+  \textbf{interactive exploration} of reaction rates (through Jupyter notebooks) and for
+  creating \textbf{reaction networks for simulation codes}.
 
 \end{alertblock}
 
@@ -110,8 +110,8 @@
 \begin{block}{Capabilities}
 
 \begin{itemize}
-\item Supports Reaclib library snapshots
-\item Supports weak rates tabulated in $\mathrm{(T, \rho Y_e)}$
+\item Supports Reaclib library snapshots \cite{Reaclib.2010}
+\item Supports weak rates \cite{Suzuki.2016} tabulated in $\mathrm{(T, \rho Y_e)}$
 \item Visualizes connections between nuclei as a network graph
 \item Evaluates rates as a function of temperature
 \item Symbolically constructs the ODE right hand side and Jacobian
@@ -127,7 +127,7 @@
 \begin{block}{Working with Reaclib}
 
 pynucastro can interpret reaction rates parameterized in the standard
-Reaclib formats \cite{Reaclib.2010}, storing each rate internally
+Reaclib formats, storing each rate internally
 using the \textbf{Rate} class. \textbf{Rate} interprets the Reaclib
 format and knows how to evaluate the rate as a function of
 temperature.
@@ -195,23 +195,6 @@ side. pynucastro includes a sample Python integrator using SciPy.
 %	Code Generation
 %----------------------------------------------------------------------------------------
 
-%% pynucastro provides several classes for generating code to calculate
-%% the right hand side of the system of differential equations comprising
-%% the reaction network.
-
-
-\begin{block}{Fortran Code Generation}
-
-The \textbf{BaseFortranNetwork} class uses 
-
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{figures/basefortran-network/basefortrannetwork.png}
-%\caption{Constructing a Fortran implementation of an $\mathrm{A=23}$ Urca network with \isot{C}{12} burning.}
-\end{figure}
-
-\end{block}
-
-
 \begin{block}{StarKiller Microphysics}
 
 The \textbf{StarKillerNetwork} class generates Fortran reaction
@@ -219,24 +202,41 @@ network code for astrophysical simulations that use the StarKiller
 Microphysics repository \cite{Zingale.astronum.2017}.
 
 \begin{itemize}
-    \item Uses Sympy \cite{SymPy.2017}
-    \item Derives right hand side and Jacobian matrix
-    \item Couples to physics modules in StarKiller
-    \begin{itemize}
-        \item stellar EOS
-        \item reaction screening
-        \item thermal neutrino rates
-    \end{itemize}
+    \item Right hand side and Jacobian with SymPy \cite{SymPy.2017}
+    \item Couples to a stellar equation of state
+    \item Incorporates screening and thermal neutrinos
     \item Supports CUDA Fortran
 \end{itemize}
 
-Electron fraction in a MAESTRO low-Mach hydrodynamics simulation of a
-convecting white dwarf core using the $\mathrm{A=23}$ Urca network:
+This short Python script builds a \isot{C}{12} burning network with tabulated weak $\mathrm{A=23}$ rates:
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{figures/starkiller-network/starkiller-urca-network.png}
+%\caption{Constructing a StarKiller implementation of an $\mathrm{A=23}$ Urca network with \isot{C}{12} burning.}
+\end{figure}
+
+Electron fraction in a Maestro low-Mach hydrodynamics simulation of a
+3-D convecting white dwarf core using the $\mathrm{A=23}$ Urca network:
 
 \begin{figure}
 \includegraphics[width=\linewidth]{figures/starkiller-network/wd_4lev_Tc5-5e8_rhoc4-5e9_plt06605_slice_x_electron_fraction_asymmetry.png}
 %\caption{Electron fraction in a MAESTRO low-Mach hydrodynamics simulation of a convecting white dwarf core using the $\mathrm{A=23}$ Urca network with \isot{C}{12} burning.}
 \end{figure}
+
+\end{block}
+
+\begin{block}{Ongoing Development}
+
+\begin{itemize}
+    \item Implementing nuclear partition functions
+    \item Expanding support for weak rate tabulations
+\end{itemize}
+
+%\begin{itemize}
+%    \item \small{\rmfamily{Implementing nuclear partition functions}}
+%    \item \small{\rmfamily{Expanding support for various weak rate tabulations}}
+%    \item \small{\rmfamily{\textit{Tell us what features you would like ...}}}
+%\end{itemize}
 
 \end{block}
 
@@ -275,7 +275,7 @@ convecting white dwarf core using the $\mathrm{A=23}$ Urca network:
 \begin{itemize}
 \item pynucastro is freely available under the \textbf{BSD 3-Clause open source} license.
 \item For the companion \textbf{software paper}, see \cite{pynucastro.joss.2018}.
-\item Visit us on GitHub to \textbf{download} pynucastro or report \textbf{issues} and request features:
+\item Visit us on GitHub to \textbf{download} pynucastro or report \textbf{issues} and \textbf{request features}:
 \end{itemize}
 
 \url{https://github.com/pynucastro/pynucastro}
