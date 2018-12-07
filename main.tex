@@ -69,11 +69,11 @@
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{pynucastro: Nuclear Reaction Networks and Code Generation} % Poster title
+\title{pynucastro: Code Generation and Visualization for Nuclear Reaction Networks} % Poster title
 
-\author{Donald E. Willcox (\href{mailto:donald.willcox@stonybrook.edu}{donald.willcox@stonybrook.edu}) and Michael Zingale (\href{mailto:michael.zingale@stonybrook.edu}{michael.zingale@stonybrook.edu})} % Author(s)
+\author{Donald E. Willcox (LBNL), Adam Jacobs (MSU), Xinlong Li (SBU), and Michael Zingale (SBU)}
 
-\institute{Department of Physics and Astronomy, Stony Brook University} % Institution(s)
+\institute{Lawrence Berkeley National Laboratory (LBNL), Michigan State University (MSU), Stony Brook University (SBU)} % Institution(s)
 
 %----------------------------------------------------------------------------------------
 
@@ -162,13 +162,26 @@ containing multiple rates, including Reaclib snapshots. We use
 just a few lines of Python in the following Jupyter notebook:
 
 \begin{figure}
-\includegraphics[width=\linewidth]{figures/library-examples-nuclei.png}
+\includegraphics[width=1.1\linewidth]{figures/library-examples-nuclei.png}
 %\caption{Creating a CNO network in a Jupyter notebook}
 \end{figure}
 
 Using the \textbf{Composition} and \textbf{Explorer} classes, we also
 construct an interactive graph of the network with the value of each
 rate indicated by its arrow color with variable density and temperature.
+
+\end{block}
+
+\begin{block}{Python Code Generation}
+
+The \textbf{PythonNetwork} class generates Python code to calculate
+each rate as a function of temperature and the ODE right hand
+side. pynucastro includes a sample Python integrator using SciPy.
+
+%% \begin{figure}
+%% \includegraphics[width=0.8\linewidth]{figures/python-network-code/python-network-code.png}
+%% %\caption{Python code evaluating the Reaclib rate for  $\isotm{C}{12} + p \rightarrow \isotm{N}{13}$}
+%% \end{figure}
 
 \end{block}
 
@@ -185,26 +198,11 @@ rate indicated by its arrow color with variable density and temperature.
 %% pynucastro provides several classes for generating code to calculate
 %% the right hand side of the system of differential equations comprising
 %% the reaction network.
-  
-\begin{block}{Python Code Generation}
-
-The \textbf{PythonNetwork} class generates Python code to calculate
-each rate as a function of temperature and the ODE right hand
-side. pynucastro includes a sample Python integrator using SciPy.
-
-%% \begin{figure}
-%% \includegraphics[width=0.8\linewidth]{figures/python-network-code/python-network-code.png}
-%% %\caption{Python code evaluating the Reaclib rate for  $\isotm{C}{12} + p \rightarrow \isotm{N}{13}$}
-%% \end{figure}
-
-\end{block}
 
 
 \begin{block}{Fortran Code Generation}
 
-The \textbf{BaseFortranNetwork} class uses Sympy \cite{SymPy.2017} to
-represent the ODEs symbolically, deriving both the right
-hand side and the Jacobian matrix for implicit integration with VODE \cite{VODE.1989}.
+The \textbf{BaseFortranNetwork} class uses 
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{figures/basefortran-network/basefortrannetwork.png}
@@ -216,10 +214,21 @@ hand side and the Jacobian matrix for implicit integration with VODE \cite{VODE.
 
 \begin{block}{StarKiller Microphysics}
 
-The \textbf{StarKillerNetwork} class generates reaction
-networks for astrophysical simulations using the StarKiller
-Microphysics code \cite{Zingale.astronum.2017}.
-\newline
+The \textbf{StarKillerNetwork} class generates Fortran reaction
+network code for astrophysical simulations that use the StarKiller
+Microphysics repository \cite{Zingale.astronum.2017}.
+
+\begin{itemize}
+    \item Uses Sympy \cite{SymPy.2017}
+    \item Derives right hand side and Jacobian matrix
+    \item Couples to physics modules in StarKiller
+    \begin{itemize}
+        \item stellar EOS
+        \item reaction screening
+        \item thermal neutrino rates
+    \end{itemize}
+    \item Supports CUDA Fortran
+\end{itemize}
 
 Electron fraction in a MAESTRO low-Mach hydrodynamics simulation of a
 convecting white dwarf core using the $\mathrm{A=23}$ Urca network:
